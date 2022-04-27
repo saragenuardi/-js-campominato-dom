@@ -1,17 +1,13 @@
- //Generare una griglia di gioco quadrata in cui ogni cella contiene un numero compreso tra 1 e 100.
-//Quando l'utente clicca su ogni cella, la cella cliccata si colora di azzurro.
-
-
-//Bonus:
-//Aggiungere la possibilità di scegliere un livello di difficoltà in base al quale viene generata una griglia di uno dei seguenti range:
-//con difficoltà 1 => tra 1 e 100
-//con difficoltà 2 => tra 1 e 81
-//con difficoltà 3 => tra 1 e 49
+//Generare una griglia di gioco quadrata in cui ogni cella contiene un numero compreso tra 1 e 100.
+//Il computer deve generare 16 numeri casuali nello stesso range della difficoltà prescelta: le bombe.
+//I numeri nella lista delle bombe non possono essere duplicati.
+//In seguito l'utente clicca su una cella: se il numero è presente nella lista dei numeri generati - abbiamo calpestato una bomba - la cella si colora di rosso e la partita termina, altrimenti la cella cliccata si colora di azzurro e l'utente può continuare a cliccare sulle altre celle.
+//La partita termina quando il giocatore clicca su una bomba o raggiunge il numero massimo possibile di numeri consentiti.
+//Al termine della partita il software deve comunicare il punteggio, cioè il numero di volte che l’utente ha cliccato su una cella che non era una bomba.
 
 
 //Inserisci il "click" dentro il bottone 
 document.getElementById("btn-play").addEventListener("click", function() {
-
 
 
     //Richiama il form
@@ -31,7 +27,12 @@ document.getElementById("btn-play").addEventListener("click", function() {
         default:
             index = 49;
     }
-    //Riichiama funzione
+
+    //Genera 16  bombe (numeri random)
+        const bombsNumber = 16;
+        const bombsArray = generateRndNumbers(bombsNumber, index);
+        
+    //Richiama funzione di creazione di celle
     generateGrid(choice, index) 
 })
 
@@ -62,6 +63,25 @@ function generateGrid (className, cellNumber) {
     }
     
 }
+
+//UTILITY FUNCTIONS
+//Genera numeri random
+function getRndInteger(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) ) + min;
+  }
+
+
+function generateRndNumbers(numberQuantity, maxLimit) {
+    const numberArray = [];
+    while (numberArray.length < numberQuantity) {
+        const randomNumber = getRndInteger (1, maxLimit);
+        if (!numberArray.includes(randomNumber)) {
+            numberArray.push(randomNumber);
+        }
+    }
+    return numberArray;
+}
+
 
 
 

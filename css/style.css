@@ -74,6 +74,10 @@ main {
     font-size: 1.5em;
 }
 
+.bomb {
+    background-color: red;
+}
+
 /* main grid hard*/
 .hard {
     width: calc(100% / 7);
